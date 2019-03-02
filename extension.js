@@ -1,30 +1,68 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-const vscode = require('vscode');
+const vscode = require("vscode");
+const fs = require("fs");
+const path = require("path");
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+function mkdirpath(dirPath) {
+  if (!fs.accessSync(dirPath, fs.constants.R_OK | fs.constants.W_OK)) {
+    try {
+      fs.mkdirSync(dirPath);
+    } catch (e) {
+      mkdirpath(path.dirname(dirPath));
+      mkdirpath(dirPath);
+    }
+  }
+}
+
+async function architect(uri) {
+  const fsPath = (uri && uri.fsPath) || undefined;
+  let folder;
+  let hasInitialPath = false;
+
+  if (fsPath) {
+    folder = path.dirname(fsPath);
+    hasInitialPath = true;
+  } else {
+    folder = await vscode.window.showInputBox({
+      prompt: "Architect to",
+      value: vscode.workspace.workspaceFolders[0].uri.fsPath
+    });
+  }
+
+  if (!folder) {
+    throw new Error("No folder");
+  }
+
+  if (!hasInitialPath) {
+    mkdirpath(folder);
+  }
+
+  fs.writeFile(
+    folder + "/testing-architect.js",
+    "",
+    {
+      flag: "wx"
+    },
+    err => {
+      if (err) throw err;
+    }
+  );
+
+  vscode.window.showInformationMessage(folder);
+}
 
 /**
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+  // The command has been defined in the package.json file
+  // Now provide the implementation of the command with registerCommand
+  // The commandId parameter must match the command field in package.json
+  let disposable = vscode.commands.registerCommand(
+    "extension.architect",
+    architect
+  );
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "architect" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('extension.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World!');
-	});
-
-	context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable);
 }
 exports.activate = activate;
 
@@ -32,6 +70,6 @@ exports.activate = activate;
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
-}
+  activate,
+  deactivate
+};
