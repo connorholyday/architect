@@ -3,6 +3,11 @@
   "displayName": "architect",
   "description": "Use blueprints to scaffold out new folders",
   "publisher": "connorholyday",
+  "homepage": "https://github.com/connorholyday/architect#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/connorholyday/architect.git"
+  },
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.30.0"
