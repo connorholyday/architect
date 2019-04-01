@@ -1,7 +1,5 @@
 # Architect README
 
-This is the README for your extension "architect". After writing up a brief description, we recommend including the following sections.
-
 This extension adds the ability to right-click on a folder and build a sub-folder containing files and folders listed out in a config. This is ideal if you find yourself following a pattern like with certain component architectures.
 
 ## How it works
