@@ -21,8 +21,15 @@
       }
     ],
     "menus": {
+      "commandPalette": [
+        {
+          "command": "extension.architect",
+          "when": "config.noExists"
+        }
+      ],
       "explorer/context": [
         {
+          "when": "explorerResourceIsFolder",
           "command": "extension.architect",
           "group": "Architect@1"
         }
@@ -40,5 +47,8 @@
     "typescript": "^3.3.1",
     "vscode": "^1.1.28"
   },
-  "dependencies": {}
+  "dependencies": {
+    "cosmiconfig": "^5.2.0",
+    "fs-extra": "^7.0.1"
+  }
 }
