@@ -2,7 +2,7 @@
   "name": "architect",
   "displayName": "architect",
   "description": "Use blueprints to scaffold out new folders",
-  "publisher": "Connor Holyday",
+  "publisher": "connorholyday",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.30.0"
