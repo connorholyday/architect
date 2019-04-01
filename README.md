@@ -42,6 +42,10 @@ module.exports = {
 };
 ```
 
+## Issues
+
+Log all issues here: [https://github.com/connorholyday/architect/issues]()
+
 ## Release Notes
 
 ### 1.0.0
