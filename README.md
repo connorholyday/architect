@@ -1,65 +1,49 @@
-# architect README
+# Architect README
 
 This is the README for your extension "architect". After writing up a brief description, we recommend including the following sections.
 
-## Features
+This extension adds the ability to right-click on a folder and build a sub-folder containing files and folders listed out in a config. This is ideal if you find yourself following a pattern like with certain component architectures.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## How it works
 
-For example if there is an image subfolder under your extension project workspace:
+1. Create a config with an array of paths to be built
+2. Set the `name` option to `true` if you want to use the special string `ARCHITECT_NAME` to be replaced through an input dialog
+3. Right-click on a folder and choose `Architect` to build your paths
 
-\!\[feature X\]\(images/feature-x.png\)
+## Config
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Options:
 
-## Requirements
+- `name`: Boolean - for string replacement in the paths. If this is set to `true` then replace part of your path with `ARCHITECT_NAME`.
+- `paths`: Array[String] - an array of strings representing the paths to be created.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Example Config
 
-## Extension Settings
+```
+module.exports = {
+  paths: [
+    "Component/Component.js",
+    "Component/index.js",
+    "Component/styles.js"
+  ]
+};
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+With name set to `true`:
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+```
+module.exports = {
+  name: true,
+  paths: [
+    "ARCHITECT_NAME/ARCHITECT_NAME.js",
+    "ARCHITECT_NAME/index.js",
+    "ARCHITECT_NAME/styles.js"
+  ]
+};
+```
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Initial release of Architect
